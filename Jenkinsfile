@@ -1,7 +1,11 @@
 pipeline {
   agent any; 
   parameters {
-    string defaultValue: '12334', description: 'ngfvgjkhjlkvhf', name: 'sujay', trim: true
+    string defaultValue: '12334', description: 'ngfvgjkhjlkvhf', name: 'sujay', trim: true 
+    credentials credentialType: 'com.cloudbees.plugins.credentials.impl.UsernamePasswordCredentialsImpl', defaultValue: '', name: 'banking', required: false
+  file ''
+  choice choices: ['master slave', 'main1', 'main0'], name: 'branch'
+  password defaultValue: '1234567', name: 'passcode'
   } 
   stages {
         stage ('BUILD') {
