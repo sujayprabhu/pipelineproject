@@ -1,0 +1,41 @@
+pipeline {
+  agent any; 
+  parameters {
+  
+  } 
+  stages {
+        stage ('BUILD') {
+  steps {
+            git(
+            credentialsId: 'git-hub', url: 'https://github.com/abhibc0202/java1.git'
+            )   
+         sh '''
+            mvn clean package
+            '''
+         }
+       }   
+    stage ('TEST PARALLEL') {
+      parallel {
+        stage ('TEST ON CHROME') {
+           steps {
+             echo "this is test stage on chrome"
+             sh "sleep 5"
+           }
+        }
+         stage ('TEST on firefox') {
+           steps {
+             echo "this is test stage on firefox"
+             sh "sleep 5"
+           }
+        }  
+      } 
+    }    
+     
+    stage ('DEPLOY') {
+      steps {
+        echo "this is deploy stage "
+        sh "sleep 5"
+      }
+    }
+  }
+}
