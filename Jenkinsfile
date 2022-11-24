@@ -9,10 +9,8 @@ pipeline {
   } 
   stages {
         stage ('BUILD') {
-  steps {
-            git(
-                  'https://github.com/sujayprabhu/java-sample.git' 
-                )   
+          steps {
+                  git 'https://github.com/sujayprabhu/java-sample.git'   
          sh '''
             mvn clean package
             '''
